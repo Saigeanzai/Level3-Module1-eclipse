@@ -1,5 +1,10 @@
 package _00_Intro_To_ArrayLists;
 
+import java.awt.Button;
+import java.awt.Frame;
+import java.awt.event.ActionEvent;
+import java.util.ArrayList;
+
 public class _02_GuestBook {
     /*
      * Create a GUI with two buttons. One button reads "Add Name" and the other
@@ -13,5 +18,41 @@ public class _02_GuestBook {
      * Guest #3: Greg Ganders
      * Guest #4: Donny Doners
      */
-
+	public static void main(String[] args) {
+		
+		Frame frame = new Frame();
+		Button addButton = new Button();
+		Button viewButton = new Button();
+		
+		frame.add(addButton);
+		frame.add(viewButton);
+		
+		addButton.addActionListener(null);
+		viewButton.addActionListener(null);
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	}
+	
+	public void actionPerformed(ActionEvent e) {
+	//some code w buttonPressed
+		//if(addButton.equals(buttonPressed){
+	// String names = JOptionPane.showInputDialog("add a name");	
+	//}
+	
+	ArrayList<String> namesList = new ArrayList<String>();
+		//namesList.add(names);
+	
+	//if(viewButton.equals(buttonPressed)
+	
+	
+	
+}
 }

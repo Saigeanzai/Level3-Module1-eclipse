@@ -12,7 +12,7 @@ public class _01_IntroToArrayLists {
 		stuff.add("string1");
 		stuff.add("string2");
 		stuff.add("string3");
-		stuff.add("string4");
+		stuff.add("string4e");
 		// 3. Print all the Strings using a standard for-loop
 		for (int i = 0; i < stuff.size(); i++) {
 			// System.out.println(stuff.get(i));
@@ -35,8 +35,7 @@ public class _01_IntroToArrayLists {
 		}
 		// 7. Print only the Strings that have the letter 'e' in them.
 		for (int i =0; i<stuff.size(); i++) {
-			char character = stuff.get(i).charAt(i);
-			if (character == 'e') {
+			if (stuff.get(i).contains("e")) {
 				System.out.println(stuff.get(i));
 			}
 		}
