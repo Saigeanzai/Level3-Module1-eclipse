@@ -1,9 +1,14 @@
 package _00_Intro_To_ArrayLists;
 
 import java.awt.Button;
-import java.awt.Frame;
+import java.awt.Panel;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 public class _02_GuestBook {
     /*
@@ -18,40 +23,52 @@ public class _02_GuestBook {
      * Guest #3: Greg Ganders
      * Guest #4: Donny Doners
      */
+	JButton addButton;
+	JButton viewButton;
 	public static void main(String[] args) {
 		
-		Frame frame = new Frame();
-		Button addButton = new Button();
-		Button viewButton = new Button();
+		JFrame frame = new JFrame();
+		JPanel panel = new JPanel();
+		JButton addButton = new JButton("Add Name");
+		JButton viewButton = new JButton("View Names");
 		
-		frame.add(addButton);
-		frame.add(viewButton);
+		
 		
 		addButton.addActionListener(null);
 		viewButton.addActionListener(null);
 		
+		frame.setSize(300,100);
+		
+		
+		frame.add(panel);
+		panel.add(addButton);
+		panel.add(viewButton);
+		
+		frame.setVisible(true);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		
 		
 		
 		
 		
-		
-		
-		
+	
+	}
+	public void actionPerformed(ActionEvent e) {
+	JButton buttonPressed = (JButton)e.getSource();
+	String names = null;
+		if(addButton.equals(buttonPressed)){
+	 names = JOptionPane.showInputDialog("add a name");	
 	}
 	
-	public void actionPerformed(ActionEvent e) {
-	//some code w buttonPressed
-		//if(addButton.equals(buttonPressed){
-	// String names = JOptionPane.showInputDialog("add a name");	
-	//}
-	
 	ArrayList<String> namesList = new ArrayList<String>();
-		//namesList.add(names);
+		namesList.add(names);
 	
-	//if(viewButton.equals(buttonPressed)
-	
+	if(viewButton.equals(buttonPressed)){
+	 for (int i=0; i<namesList.size(); i++){
+	 System.out.println("Guest #" + "i: " + namesList.get(i));
+	}
+	}
 	
 	
 }
