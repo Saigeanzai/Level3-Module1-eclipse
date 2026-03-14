@@ -14,14 +14,27 @@ public class LongChipCompetition {
 
 	public static void main(String[] args) {
 		LongChipCompetition lcc = new LongChipCompetition();
+		lcc.initializeBeatles();
 		ArrayList<Beatle> beatles = lcc.getTheBand();
-		int greatestChip = -1;
+		Beatle currentBeatle;
+		Beatle e;
+		double greatestChip = -1.0;
 		for (int i = 0; i < beatles.size(); i++) {
+			currentBeatle = beatles.get(i);
+			ArrayList<Chip> beatlesChip = currentBeatle.getChips();
+			//System.out.println("Current beatle is " + currentBeatle.getName());
 			for (int j = 0; j < beatles.get(i).getChips().size(); j++) {
-				// if (beatles.get(i).getChips(j) > greatestChip) {
-				// greatestChip = beatles.get(i);
+				double chipLength = beatlesChip.get(j).getLength();
+				 if (beatles.get(i).getChips().get(j).getLength() > greatestChip) {
+					 greatestChip = chipLength;
+					 currentBeatle = beatles.get(i);
+					
+				 }
+				
 			}
 		}
+		//System.out.println(greatestChip);
+		// System.out.println("The current longest chip holder is " + currentBeatle.getName() + " with " + greatestChip);
 	}
 
 	// }
