@@ -49,11 +49,9 @@ public class GameBoard extends JFrame implements ActionListener {
         //    Also, add action listeners to each Card object and then add each
         //    of the Card objects to the ArrayList of Cards.
         for (int i=0; i < TOTAL_CARDS; i++) {
-        	if (i<=4 || i>0) {
-        		Card temp = new Card(1);
+        		Card temp = new Card(i / 4 + 1);
         		temp.addActionListener(this);
             	cards.add(temp);
-        	}
         }
        
         // 4. Use Collections.shuffle() method to randomize the order of
@@ -79,7 +77,12 @@ public class GameBoard extends JFrame implements ActionListener {
     // 9. Fill in the drawCards method to draw all the cards in the ArrayList.
     //    Run your code and verify 2 cards are displayed and the game works.
     public void drawCards() {
-        
+        for (int i=0; i<TOTAL_CARDS; i++) {
+        	
+        	cards.get(i).draw();
+        }
+    	
+    	
     }
     
     // 10. 
