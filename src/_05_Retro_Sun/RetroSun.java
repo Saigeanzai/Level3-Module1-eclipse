@@ -1,5 +1,7 @@
 package _05_Retro_Sun;
 
+import java.util.ArrayList;
+
 import processing.core.PApplet;
 
 /*
@@ -18,6 +20,10 @@ public class RetroSun extends PApplet {
 			color(217, 0, 151) };
 
 	int bgColor = color(31, 0, 48);
+	float y;
+	float h;
+	float YY;
+	float HH;
 
 	@Override
 	public void settings() {
@@ -29,6 +35,10 @@ public class RetroSun extends PApplet {
 	public void setup() {
 		// 2. Set bgColor as the background color
 		background(bgColor);
+		y = 800 / 2;
+		h = 40;
+		YY = 800 / 2;
+		HH = 40;
 	}
 
 	@Override
@@ -100,10 +110,10 @@ public class RetroSun extends PApplet {
 		// To draw each rectangle we need to find its x, y, width, height
 		// *The y position can be any value within the sun:
 		// float y = width / 2;
-		float y = 800 / 2;
+		
 		// *The height can be any value you choose:
 		// float h = 40;
-		float h = 40;
+		
 		// *The x position can be the center of the sun's x position minus the radius:
 		// float x = sunCenterX - sunRadius
 		float x = 400 - 250;
@@ -112,7 +122,7 @@ public class RetroSun extends PApplet {
 		float w = 2 * 250;
 		// Do you see a section missing from the sun like in the 3rd image?
 		fill(bgColor);
-		rect(x,y-180,w,h);
+		rect(x,y,w,h);
 		/*
 		 * PART 4: Moving the missing sun sections
 		 *
@@ -123,17 +133,18 @@ public class RetroSun extends PApplet {
 		// Decrease the y variable of the rectangular section created in PART 3.
 		// If there isn't a variable, declare a float variable OUTSIDE of the
 		// draw function AND initialize it in the setup() function.
-		while(y>220) {
-		y-=50;
+		if(y>240) {
+		y-=1;
+		h-=0.3;
 		}
 		// Do you see the rectangle moving upwards?
 
 		// Pick a y positon to be the location when the sections stop moving up.
 		// If the rectangle's y positon is above this, move the rectangle's
 		// y position back to the bottom of the sun.
-if (y<220) {
-	y=550;
-}
+		if(y==240) {
+			y=550;
+		}
 		// Does the rectangle move back to the bottom?
 
 		// Decrease the the height of the rectangle as it moves upwards.
@@ -143,16 +154,29 @@ if (y<220) {
 		// Adjust the amount to decrease so that it disappears close to the top.
 		// HINT: You can use the map() function again,
 		// h = map(y, missingSectionTopY, missingSectionBottomY, 1, 40);
-
+		h = map(y, 240, 550, 1, 40);
 		// The map() function will make the value of h = 1 if y is at the top,
 		// and h = 40 if y is at the bottom.
-
 		/*
 		 * PART 5: Managing the missing sun sections
 		 *
 		 * Using a list to manage moving multiple missing sun sections
 		 */
-
+ArrayList<Rectangle> sunSections = new ArrayList<>();
+for(int i=0; i<sunSections.size(); i++) {
+	float y = 400;
+	float h = 40;
+	Rectangle rectaangle = new Rectangle(x, y, w, h);
+	sunSections.add(rectaangle);
+	if(y>240) {
+		y-=1;
+		h-=0.3;
+		}
+	if(y==240) {
+		y=550;
+	}
+	h = map(y, 240, 550, 1, 40);
+}
 		// Figure out how to create the other missing sun sections using the
 		// code you wrote for the 1 missing sun section.
 		// HINT: You can use the Rectangle class defined below to create
