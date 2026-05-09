@@ -44,10 +44,10 @@ public class RetroSun extends PApplet {
 		HH = 40;
 		sunSections = new ArrayList<>();
 		for(int i=0; i< 10; i++) {
-			y = 400 - i*40;
+			y = 400 - i*35;
 			h = 40;
 			h = map(y, 240, 550, 1, 40);
-			Rectangle rectaangle = new Rectangle(x, y, w, h);
+			Rectangle rectaangle = new Rectangle(x, y+180, w, h);
 			sunSections.add(rectaangle);
 		}
 	}
@@ -143,9 +143,9 @@ public class RetroSun extends PApplet {
 		// draw function AND initialize it in the setup() function.
 		for (int i=0; i<sunSections.size(); i++) {
 			if (sunSections.get(i).y>240) {
-				sunSections.get(i).y -=1;
+				sunSections.get(i).y -=0.4;
 				sunSections.get(i).h -=0.3;
-				sunSections.get(i).h = map(y, 240, 550, 1, 40);
+				sunSections.get(i).h = map(sunSections.get(i).y , 240, 550, 1, 40);
 			}
 			if (sunSections.get(i).y<=240) {
 				sunSections.get(i).y=550;
