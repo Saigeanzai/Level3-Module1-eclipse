@@ -77,7 +77,29 @@ public class CaliforniaWeatherRunner implements ActionListener {
 			JOptionPane.showMessageDialog(null, "The following cities are " + input + ": \n" + cities);
 		}
 		if (range.equals(buttonPressed)) {
-			
+			String minimum = JOptionPane.showInputDialog("Enter a minimum temperature");
+			int minimum2 = Integer.parseInt(minimum);
+			String maximum = JOptionPane.showInputDialog("enter a maximum temperatuer");
+			int maximum2 = Integer.parseInt(maximum);
+			ArrayList<String> key = new ArrayList<>();
+			for (String i : weatherData.keySet()) {
+				if (weatherData.get(i).temperatureF >= minimum2 && weatherData.get(i).temperatureF <= maximum2) {
+					key.add(i);
+				}
+			}
+			String cities = "";
+			for (int i = 0; i < key.size(); i++) {
+				cities += key.get(i);
+				if (i < key.size() - 1) {
+					cities += ", ";
+				}
+				if (i % 5 == 0 && i > 0) {
+					cities += "\n";
+				}
+			}
+			JOptionPane.showMessageDialog(null, "The following cities with the temperatures between " + minimum2
+					+ " and " + maximum2 + " are: " + cities);
+
 		}
 	}
 }
