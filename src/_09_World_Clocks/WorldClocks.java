@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.TimeZone;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -37,65 +38,88 @@ import javax.swing.Timer;
  */
 
 public class WorldClocks implements ActionListener {
-    ClockUtilities clockUtil;
-    Timer timer;
-    TimeZone timeZone;
+	ClockUtilities clockUtil;
+	Timer timer;
+	// TimeZone timeZone;
 
-    JFrame frame;
-    JPanel panel;
-    JTextArea textArea;
-    
-    String city;
-    String dateStr;
-    String timeStr;
-    HashMap<String, TimeZone> cities = new HashMap<String, TimeZone>();
-    
-    public WorldClocks() {
-        clockUtil = new ClockUtilities();
-        
-        String cityyy = JOptionPane.showInputDialog("Enter a City");
-        String countryyy = JOptionPane.showInputDialog("Enter the Country");
-        TimeZone timezoone = clockUtil.getTimeZoneFromCityName(cityyy);
-        
-        cities.put(cityyy, timeZone);
-        
-        // The format for the city must be: city, country (all caps)
-        city = "Chicago, US";
-        timeZone = clockUtil.getTimeZoneFromCityName(city);
-        
-        Calendar calendar = Calendar.getInstance(timeZone);
-        String month = calendar.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault());
-        String dayOfWeek = calendar.getDisplayName( Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault());
-        dateStr = dayOfWeek + " " + month + " " + calendar.get(Calendar.DAY_OF_MONTH) + " " + calendar.get(Calendar.YEAR);
-        
-        System.out.println(dateStr);
+	JFrame frame;
+	JPanel panel;
+	JTextArea textArea;
+	JButton button;
 
-        // Sample starter program
-        frame = new JFrame();
-        panel = new JPanel();
-        textArea = new JTextArea();
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setVisible(true);
-        frame.setSize(100, 100);
-        frame.add(panel);
-        panel.add(textArea);
-        textArea.setText(city + "\n" + dateStr);
-        
-        // This Timer object is set to call the actionPerformed() method every
-        // 1000 milliseconds
-        timer = new Timer(1000, this);
-        timer.start();
-    }
+	String city;
+	String dateStr;
+	String timeStr;
+	HashMap<String, TimeZone> cities = new HashMap<String, TimeZone>();
 
-    @Override
-    public void actionPerformed(ActionEvent arg0) {
-        Calendar c = Calendar.getInstance(timeZone);
-        String militaryTime = c.get(Calendar.HOUR_OF_DAY) + ":" + c.get(Calendar.MINUTE) + ":" + c.get(Calendar.SECOND);
-        String twelveHourTime = " [" + c.get(Calendar.HOUR) + ":" + c.get(Calendar.MINUTE) + ":" + c.get(Calendar.SECOND) + "]";
-        timeStr = militaryTime + twelveHourTime;
-        
-        System.out.println(timeStr);
-        textArea.setText(city + "\n" + dateStr + "\n" + timeStr);
-        frame.pack();
-    }
+	public WorldClocks() {
+		clockUtil = new ClockUtilities();
+
+		// Calendar c = Calendar.getInstance(timezoone);
+
+		// System.out.println("full date and time: " + c.getTime());
+
+		// The format for the city must be: city, country (all caps)
+		// city = "Chicago, US";
+		// timeZone = clockUtil.getTimeZoneFromCityName(city);
+
+		
+
+		// Sample starter program
+		frame = new JFrame();
+		panel = new JPanel();
+		textArea = new JTextArea();
+		button = new JButton("add city");
+		button.addActionListener(this);
+		panel.add(button);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+		frame.setSize(200, 100);
+		frame.add(panel);
+		panel.add(textArea);
+//        textArea.setText(city + "\n" + dateStr);
+//        for (int i = 0; i<cities.size(); i++) {
+//        	JPanel tempPanel = new JPanel();
+//        	JTextArea tempText = new JTextArea();
+//        	frame.add(tempPanel);
+//        	tempPanel.add(tempText);
+//        	tempText.setText(cityyy + "\n" + c.getTime());
+//        }
+
+		frame.setVisible(true);
+		// This Timer object is set to call the actionPerformed() method every
+		// 1000 milliseconds
+		timer = new Timer(1000, this);
+		timer.start();
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == button) {
+			String cityyy = JOptionPane.showInputDialog("Enter a City and the Country");
+			TimeZone timezoone = clockUtil.getTimeZoneFromCityName(cityyy);
+			cities.put(cityyy, timezoone);
+		} else {
+textArea.setText("");
+			for (String city : cities.keySet()) {
+				TimeZone timeZone = cities.get(city);
+
+				Calendar c = Calendar.getInstance(timeZone);
+				String militaryTime = c.get(Calendar.HOUR_OF_DAY) + ":" + c.get(Calendar.MINUTE) + ":"
+						+ c.get(Calendar.SECOND);
+				String twelveHourTime = " [" + c.get(Calendar.HOUR) + ":" + c.get(Calendar.MINUTE) + ":"
+						+ c.get(Calendar.SECOND) + "]";
+				timeStr = militaryTime + twelveHourTime;
+
+				String month = c.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault());
+				String dayOfWeek = c.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault());
+				dateStr = dayOfWeek + " " + month + " " + c.get(Calendar.DAY_OF_MONTH) + " " + c.get(Calendar.YEAR);
+
+				System.out.println(timeStr);
+				textArea.setText(textArea.getText() + "\n" + city + "\n" + dateStr + "\n" + timeStr);
+
+				frame.pack();
+			}
+		}
+	}
 }
